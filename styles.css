@@ -1,0 +1,101 @@
+@keyframes circleajax {
+  0% {
+    border-top-color: #646464;
+    border-right-color: rgba(50, 50, 50, 0.25);
+    border-bottom-color: rgba(50, 50, 50, 0.25);
+    border-left-color: rgba(50, 50, 50, 0.25); }
+  25% {
+    border-top-color: rgba(50, 50, 50, 0.25);
+    border-right-color: #646464;
+    border-bottom-color: rgba(50, 50, 50, 0.25);
+    border-left-color: rgba(50, 50, 50, 0.25); }
+  50% {
+    border-top-color: rgba(50, 50, 50, 0.25);
+    border-right-color: rgba(50, 50, 50, 0.25);
+    border-bottom-color: #646464;
+    border-left-color: rgba(50, 50, 50, 0.25); }
+  75% {
+    border-top-color: rgba(50, 50, 50, 0.25);
+    border-right-color: rgba(50, 50, 50, 0.25);
+    border-bottom-color: rgba(50, 50, 50, 0.25);
+    border-left-color: #646464; }
+  100% {
+    border-top-color: #646464;
+    border-right-color: rgba(50, 50, 50, 0.25);
+    border-bottom-color: rgba(50, 50, 50, 0.25);
+    border-left-color: rgba(50, 50, 50, 0.25); } }
+
+.block_snapfeeds .snap-media-object {
+  font-weight: 500;
+  padding: 0.5em 0; }
+  .block_snapfeeds .snap-media-object::after {
+    display: block;
+    clear: both;
+    content: ""; }
+  .block_snapfeeds .snap-media-object > a:focus {
+    display: block; }
+  .block_snapfeeds .snap-media-object > a > img,
+  .block_snapfeeds .snap-media-object > img {
+    float: left;
+    display: block;
+    width: 36px;
+    margin: .3em 1em 0 .3em;
+    height: auto;
+    vertical-align: baseline; }
+  .block_snapfeeds .snap-media-object .snap-media-body {
+    overflow: hidden; }
+    .block_snapfeeds .snap-media-object .snap-media-body p,
+    .block_snapfeeds .snap-media-object .snap-media-body small {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0; }
+    .block_snapfeeds .snap-media-object .snap-media-body .text_to_html {
+      line-height: 1.3em; }
+    .block_snapfeeds .snap-media-object .snap-media-body a:hover, .block_snapfeeds .snap-media-object .snap-media-body a:focus {
+      text-decoration: underline; }
+    .block_snapfeeds .snap-media-object .snap-media-body .label {
+      font-size: small; }
+  .block_snapfeeds .snap-media-object h3 {
+    color: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0; }
+  .block_snapfeeds .snap-media-object h3 small {
+    color: inherit;
+    opacity: 0.9; }
+  .block_snapfeeds .snap-media-object .snap-media-meta {
+    display: block;
+    font-size: 0.75rem;
+    color: #6c757d; }
+  .block_snapfeeds .snap-media-object .snap-unread-marker {
+    color: #b55600; }
+
+.block_snapfeeds .snap-personal-menu-more {
+  display: block;
+  text-align: right; }
+
+.block_snapfeeds .snap-personal-menu-feed-loading:after {
+  content: '';
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  max-width: 20px;
+  max-height: 20px;
+  top: 0;
+  left: 0;
+  border: solid;
+  border-width: 6px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border-top-color: #323232;
+  border-right-color: rgba(50, 50, 50, 0.25);
+  border-bottom-color: rgba(50, 50, 50, 0.25);
+  border-left-color: rgba(50, 50, 50, 0.25);
+  animation-name: circleajax;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; }

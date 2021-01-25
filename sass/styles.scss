@@ -1,0 +1,170 @@
+// Taken from theme/snap/scss/_core.scss so it works in other themes.
+// To compile, please install sass locally and run:
+// npm install -g node-sass
+// node-sass styles.scss > ../styles.css
+
+// Clearfix mixin from bootstrap.
+@mixin clearfix() {
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}
+
+// Loading animation.
+@keyframes circleajax {
+  0% {
+    border-top-color: rgba(100, 100, 100, 1);
+    border-right-color: rgba(50, 50, 50, 0.25);
+    border-bottom-color: rgba(50, 50, 50, 0.25);
+    border-left-color: rgba(50, 50, 50, 0.25);
+  }
+  25% {
+    border-top-color: rgba(50, 50, 50, 0.25);
+    border-right-color: rgba(100, 100, 100, 1);
+    border-bottom-color: rgba(50, 50, 50, 0.25);
+    border-left-color: rgba(50, 50, 50, 0.25);
+  }
+  50% {
+    border-top-color: rgba(50, 50, 50, 0.25);
+    border-right-color: rgba(50, 50, 50, 0.25);
+    border-bottom-color: rgba(100, 100, 100, 1);
+    border-left-color: rgba(50, 50, 50, 0.25);
+  }
+  75% {
+    border-top-color: rgba(50, 50, 50, 0.25);
+    border-right-color: rgba(50, 50, 50, 0.25);
+    border-bottom-color: rgba(50, 50, 50, 0.25);
+    border-left-color: rgba(100, 100, 100, 1);
+  }
+  100% {
+    border-top-color: rgba(100, 100, 100, 1);
+    border-right-color: rgba(50, 50, 50, 0.25);
+    border-bottom-color: rgba(50, 50, 50, 0.25);
+    border-left-color: rgba(50, 50, 50, 0.25);
+  }
+}
+
+@mixin ajaxing($display, $position, $size, $borderwidth) {
+  content: '';
+  display: $display;
+  position: $position;
+  width: $size;
+  height: $size;
+  // The min / max settings are just to override original elements :after sizings if present.
+  min-width: $size;
+  min-height: $size;
+  max-width: $size;
+  max-height: $size;
+  top: 0;
+  left: 0;
+  border: solid;
+  border-width: $borderwidth;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border-top-color: rgba(50, 50, 50, 1);
+  border-right-color: rgba(50, 50, 50, 0.25);
+  border-bottom-color: rgba(50, 50, 50, 0.25);
+  border-left-color: rgba(50, 50, 50, 0.25);
+  animation-name: circleajax;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+// Variables from theme_snap.
+$font-size-sm:  .75rem;
+$gray-light:    #6c757d !default;
+$brand-warning: #b55600;
+
+// Actual styles.
+.block_snapfeeds .snap-media-object {
+  @include clearfix;
+  font-weight: 500;
+  padding: 0.5em 0;
+  // Block display for keyboard user focus.
+  > a:focus {
+    display: block;
+  }
+
+  // media o media
+  > a > img,
+  > img {
+    float: left;
+    display: block;
+    width: 36px;
+    margin: .3em 1em 0 .3em;
+    height: auto;
+    vertical-align: baseline;
+  }
+
+  // media o content
+  .snap-media-body {
+    overflow: hidden;
+
+    // for personal menu updates - need to re-visit when we re-use more widley
+    // in the messaging system we ellispe text
+    p,
+    small {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
+    }
+
+    .text_to_html {
+      line-height: 1.3em;
+    }
+
+    a {
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
+
+    // Shrink label size to support iPads
+    .label {
+      font-size: small;
+    }
+  }
+
+  // media o heading
+  h3 {
+    color: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  // any meta-data that is part of the title
+  h3 small {
+    color: inherit;
+    opacity: 0.9;
+  }
+
+  // standard media o meta - status, date
+  .snap-media-meta {
+    display: block;
+    font-size: $font-size-sm;
+    color: $gray-light;
+  }
+
+  // unread tag
+  .snap-unread-marker {
+    color: $brand-warning;
+  }
+
+}
+
+.block_snapfeeds .snap-personal-menu-more {
+  display: block;
+  text-align: right;
+}
+
+.block_snapfeeds .snap-personal-menu-feed-loading {
+  &:after {
+    @include ajaxing(inline-block, relative, 20px, 6px);
+  }
+}
