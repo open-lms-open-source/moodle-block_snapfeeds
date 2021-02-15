@@ -59,26 +59,31 @@ class block_replacer {
     /**
      * @param $targetname
      * @param $sourcename
-     * @param object|null $targetcdata
-     * @param object|null $sourcecdata
+     * @param null $targetcdata
+     * @param null $sourcecdata
+     * @param int|null $parentcontextid
+     * @throws \dml_exception
      */
-    private function replace_block($targetname,  $sourcename, $targetcdata = null, $sourcecdata = null) {
+    private function replace_block($targetname,  $sourcename, $targetcdata = null, $sourcecdata = null, $parentcontextid = null) {
         global $DB;
         $params = [
             'target_name' => $targetname,
             'source_name' => $sourcename,
         ];
-        $targetcdatasql = '';
+        $targetcdatasql = ', configdata = NULL'; // Config data should be cleared if not used.
         if (is_object($targetcdata)) {
             $targetcdatasql = ', configdata = :target_cdata';
             $params['target_cdata'] = base64_encode(serialize($targetcdata));
-        } else {
-            $targetcdatasql = ', configdata = NULL'; // Config data should be cleared if not used.
         }
         $sourcecdatasql = '';
         if (is_object($sourcecdata)) {
             $sourcecdatasql = 'AND configdata = :source_cdata';
             $params['source_cdata'] = base64_encode(serialize($sourcecdata));
+        }
+        $parentctxtsql = '';
+        if (!is_null($parentcontextid)) {
+            $parentctxtsql = 'AND parentcontextid = :parentcontextid';
+            $params['parentcontextid'] = $parentcontextid;
         }
 
         $query = <<<SQL
@@ -87,27 +92,30 @@ UPDATE {block_instances}
        $targetcdatasql
  WHERE blockname = :source_name
        $sourcecdatasql
+       $parentctxtsql
 SQL;
         $DB->execute($query, $params);
     }
 
     /**
      * Replaces all instances of upcoming events blocks with snap feeds block with the option to use deadlines.
+     * @param int|null $parentcontextid
      */
-    public function replace_upcoming_events_with_snap_feeds_deadlines() {
+    public function replace_upcoming_events_with_snap_feeds_deadlines($parentcontextid = null) {
         $config = (object) [
             'feedtype' => 'deadlines'
         ];
-        $this->replace_block('snapfeeds', 'calendar_upcoming', $config);
+        $this->replace_block('snapfeeds', 'calendar_upcoming', $config, null, $parentcontextid);
     }
 
     /**
      * Replaces all instances of snap feeds block with the option to use deadlines with upcoming events blocks.
+     * @param int|null $parentcontextid
      */
-    public function replace_snap_feeds_deadlines_with_upcoming_events() {
+    public function replace_snap_feeds_deadlines_with_upcoming_events($parentcontextid = null) {
         $config = (object) [
             'feedtype' => 'deadlines'
         ];
-        $this->replace_block('calendar_upcoming', 'snapfeeds', null, $config);
+        $this->replace_block('calendar_upcoming', 'snapfeeds', null, $config, $parentcontextid);
     }
 }

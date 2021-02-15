@@ -15,20 +15,26 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme plugin version definition.
+ * Snap feeds block event hooks.
  *
  * @package   block_snapfeeds
  * @copyright Copyright (c) 2021 Open LMS (https://www.openlms.net)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2020061104;
-$plugin->requires  = 2020061500;
-$plugin->release   = '3.9.3';
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->component = 'block_snapfeeds';
-$plugin->dependencies = [
-    'theme_snap' => '2020061103'
+$observers = [
+    [
+        'eventname' => \core\event\course_created::class,
+        'callback'  => '\block_snapfeeds\event_handlers::review_course',
+    ],
+    [
+        'eventname' => \core\event\course_updated::class,
+        'callback'  => '\block_snapfeeds\event_handlers::review_course',
+    ],
+    [
+        'eventname' => \core\event\course_restored::class,
+        'callback'  => '\block_snapfeeds\event_handlers::review_course'
+    ],
 ];

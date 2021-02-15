@@ -32,7 +32,7 @@ class block_snapfeeds_replace_test extends advanced_testcase  {
         $this->resetAfterTest();
     }
 
-    public function test_replace_with_snapfeeds() {
+    public function test_replace_all_with_snapfeeds() {
         global $DB;
         $snapdeadlinesconfigdata = (object) [
             'feedtype' => 'deadlines'
@@ -62,7 +62,7 @@ class block_snapfeeds_replace_test extends advanced_testcase  {
         $this->assertEquals($block->configdata, base64_encode(serialize($snapdeadlinesconfigdata)));
     }
 
-    public function test_replace_with_upcoming_events() {
+    public function test_replace_all_with_upcoming_events() {
         global $DB;
         $snapdeadlinesconfigdata = (object) [
             'feedtype' => 'deadlines'
@@ -90,5 +90,71 @@ class block_snapfeeds_replace_test extends advanced_testcase  {
 
         $this->assertEquals($block->blockname, 'calendar_upcoming');
         $this->assertNull($block->configdata);
+    }
+
+    public function test_replace_in_context_with_snapfeeds() {
+        global $DB, $CFG;
+
+        $snapdeadlinesconfigdata = (object) [
+            'feedtype' => 'deadlines'
+        ];
+
+        $course = $this->getDataGenerator()->create_course();
+        $time = new DateTime("now", core_date::get_user_timezone_object());
+
+        $blockinsert = (object) [
+            'blockname' => 'calendar_upcoming',
+            'parentcontextid' => context_course::instance($course->id)->id,
+            'pagetypepattern' => 'course-view-*',
+            'defaultregion' => 'side-pre',
+            'defaultweight' => 1,
+            'configdata' => null,
+            'showinsubcontexts' => 1,
+            'timecreated' => $time->getTimestamp(),
+            'timemodified' => $time->getTimestamp()
+        ];
+        $blockid = $DB->insert_record('block_instances', $blockinsert);
+
+        // Flag disabled, nothing happens.
+        $CFG->block_snapfeeds_restore_from_upcoming_events = false;
+
+        // Course creation triggers course_updated event.
+        $createevent = \core\event\course_created::create([
+            'objectid' => $course->id,
+            'context' => context_course::instance($course->id),
+            'other' => [
+                'shortname' => $course->shortname,
+                'fullname' => $course->fullname,
+                'idnumber' => $course->idnumber
+            ]
+        ]);
+        $createevent->add_record_snapshot('course', $course);
+        $createevent->trigger();
+
+        $block = $DB->get_record('block_instances', ['id' => $blockid]);
+
+        $this->assertEquals($block->blockname, 'calendar_upcoming');
+        $this->assertNull($block->configdata);
+
+        // Flag enabled, instances should be replaced.
+        $CFG->block_snapfeeds_restore_from_upcoming_events = true;
+
+        // Course creation triggers course_updated event.
+        $createevent = \core\event\course_created::create([
+            'objectid' => $course->id,
+            'context' => context_course::instance($course->id),
+            'other' => [
+                'shortname' => $course->shortname,
+                'fullname' => $course->fullname,
+                'idnumber' => $course->idnumber
+            ]
+        ]);
+        $createevent->add_record_snapshot('course', $course);
+        $createevent->trigger();
+
+        $block = $DB->get_record('block_instances', ['id' => $blockid]);
+
+        $this->assertEquals($block->blockname, 'snapfeeds');
+        $this->assertEquals($block->configdata, base64_encode(serialize($snapdeadlinesconfigdata)));
     }
 }

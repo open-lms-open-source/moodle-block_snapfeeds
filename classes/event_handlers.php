@@ -15,20 +15,36 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme plugin version definition.
+ * Event handlers.
+ * @package   block_snapfeeds
+ * @copyright Copyright (c) 2021 Open LMS (https://www.openlms.net)
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+namespace block_snapfeeds;
+
+use block_snapfeeds\api\block_replacer;
+use core\event\base;
+
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * Event handlers class.
  *
  * @package   block_snapfeeds
  * @copyright Copyright (c) 2021 Open LMS (https://www.openlms.net)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+class event_handlers {
 
-$plugin->version   = 2020061104;
-$plugin->requires  = 2020061500;
-$plugin->release   = '3.9.3';
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->component = 'block_snapfeeds';
-$plugin->dependencies = [
-    'theme_snap' => '2020061103'
-];
+    /**
+     * @param base $event
+     */
+    public static function review_course(base $event) {
+        global $CFG;
+        if (empty($CFG->block_snapfeeds_restore_from_upcoming_events)) {
+            return;
+        }
+        block_replacer::get_instance()->replace_upcoming_events_with_snap_feeds_deadlines($event->contextid);
+    }
+}
