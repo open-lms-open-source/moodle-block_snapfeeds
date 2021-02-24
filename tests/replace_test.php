@@ -28,7 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 
 class block_snapfeeds_replace_test extends advanced_testcase  {
 
-    protected function setUp() {
+    protected function setUp(): void {
         $this->resetAfterTest();
     }
 
