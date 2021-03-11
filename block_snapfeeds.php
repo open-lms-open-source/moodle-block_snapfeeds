@@ -72,10 +72,10 @@ class block_snapfeeds extends block_base {
 
         if ($this->context->get_course_context(false)) {
             if (is_guest($this->context)) {
-                return $this->content; // Course guests don't see the checklist block.
+                return $this->content; // Course guests don't see this block.
             }
         } else if (isguestuser()) {
-            return $this->content;  // Site guests don't see the checklist block.
+            return $this->content;  // Site guests don't see this block.
         }
 
         // Custom elements JS library load.
