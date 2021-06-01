@@ -24,11 +24,11 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2020061104;
-$plugin->requires  = 2020061500;
-$plugin->release   = '3.9.3';
+$plugin->version   = 2021060100;
+$plugin->requires  = 2020110900;
+$plugin->release   = '3.10.3';
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->component = 'block_snapfeeds';
 $plugin->dependencies = [
-    'theme_snap' => '2020061103'
+    'theme_snap' => '2021060100'
 ];
