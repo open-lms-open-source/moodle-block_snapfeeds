@@ -26,7 +26,7 @@ Feature: Add snapfeeds blocks.
   Scenario: Add a Snap feeds block to the main page.
     Given I log in as "admin"
     And I am on site homepage
-    And I navigate to "Turn editing on" in current page administration
+    And I turn editing mode on
     And I add the "Snap feeds" block
     Then I should see "This Snap feed has not been configured"
     And I configure the "Snap feeds" block
