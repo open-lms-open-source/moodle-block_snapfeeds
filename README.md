@@ -10,6 +10,10 @@ learners in virtual classrooms.
 ## Installation
 Extract the contents of the plugin into _/wwwroot/blocks_ then visit `admin/upgrade.php` or use the CLI script to upgrade your site.
 
+## Flags
+
+### The `block_snapfeeds_restore_from_upcoming_events`flag.
+
 ## Important notes
 * This block depends on the [Snap](https://github.com/open-lms-open-source/moodle-theme_snap) theme, therefore for it to work correctly. 
 The platform should have Snap enabled (even if it is not in use).
