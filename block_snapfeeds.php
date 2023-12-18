@@ -80,10 +80,10 @@ class block_snapfeeds extends block_base {
 
         // Custom elements JS library load.
         $paths['theme_snap/snapce'] = [
-            $CFG->wwwroot . '/pluginfile.php/' . $PAGE->context->id . '/theme_snap/vendorjs/snap-custom-elements/snap-ce'
+            $CFG->wwwroot . '/pluginfile.php/' . $PAGE->context->id . '/theme_snap/vendorjs/snap-custom-elements/snap-ce',
         ];
         $PAGE->requires->js_call_amd('theme_snap/wcloader', 'init', [
-            'componentPaths' => json_encode($paths)
+            'componentPaths' => json_encode($paths),
         ]);
 
         // Should we get data for a specific course.
