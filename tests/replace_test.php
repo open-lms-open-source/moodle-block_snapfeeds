@@ -35,7 +35,7 @@ class block_snapfeeds_replace_test extends advanced_testcase  {
     public function test_replace_all_with_snapfeeds() {
         global $DB;
         $snapdeadlinesconfigdata = (object) [
-            'feedtype' => 'deadlines'
+            'feedtype' => 'deadlines',
         ];
 
         $course = $this->getDataGenerator()->create_course();
@@ -50,7 +50,7 @@ class block_snapfeeds_replace_test extends advanced_testcase  {
             'configdata' => null,
             'showinsubcontexts' => 1,
             'timecreated' => $time->getTimestamp(),
-            'timemodified' => $time->getTimestamp()
+            'timemodified' => $time->getTimestamp(),
         ];
         $blockid = $DB->insert_record('block_instances', $blockinsert);
 
@@ -65,7 +65,7 @@ class block_snapfeeds_replace_test extends advanced_testcase  {
     public function test_replace_all_with_upcoming_events() {
         global $DB;
         $snapdeadlinesconfigdata = (object) [
-            'feedtype' => 'deadlines'
+            'feedtype' => 'deadlines',
         ];
 
         $course = $this->getDataGenerator()->create_course();
@@ -80,7 +80,7 @@ class block_snapfeeds_replace_test extends advanced_testcase  {
             'configdata' => base64_encode(serialize($snapdeadlinesconfigdata)),
             'showinsubcontexts' => 1,
             'timecreated' => $time->getTimestamp(),
-            'timemodified' => $time->getTimestamp()
+            'timemodified' => $time->getTimestamp(),
         ];
         $blockid = $DB->insert_record('block_instances', $blockinsert);
 
@@ -96,7 +96,7 @@ class block_snapfeeds_replace_test extends advanced_testcase  {
         global $DB, $CFG;
 
         $snapdeadlinesconfigdata = (object) [
-            'feedtype' => 'deadlines'
+            'feedtype' => 'deadlines',
         ];
 
         $course = $this->getDataGenerator()->create_course();
@@ -111,7 +111,7 @@ class block_snapfeeds_replace_test extends advanced_testcase  {
             'configdata' => null,
             'showinsubcontexts' => 1,
             'timecreated' => $time->getTimestamp(),
-            'timemodified' => $time->getTimestamp()
+            'timemodified' => $time->getTimestamp(),
         ];
         $blockid = $DB->insert_record('block_instances', $blockinsert);
 
@@ -125,8 +125,8 @@ class block_snapfeeds_replace_test extends advanced_testcase  {
             'other' => [
                 'shortname' => $course->shortname,
                 'fullname' => $course->fullname,
-                'idnumber' => $course->idnumber
-            ]
+                'idnumber' => $course->idnumber,
+            ],
         ]);
         $createevent->add_record_snapshot('course', $course);
         $createevent->trigger();
@@ -146,8 +146,8 @@ class block_snapfeeds_replace_test extends advanced_testcase  {
             'other' => [
                 'shortname' => $course->shortname,
                 'fullname' => $course->fullname,
-                'idnumber' => $course->idnumber
-            ]
+                'idnumber' => $course->idnumber,
+            ],
         ]);
         $createevent->add_record_snapshot('course', $course);
         $createevent->trigger();

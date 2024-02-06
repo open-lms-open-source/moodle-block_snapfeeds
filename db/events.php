@@ -35,6 +35,6 @@ $observers = [
     ],
     [
         'eventname' => \core\event\course_restored::class,
-        'callback'  => '\block_snapfeeds\event_handlers::review_course'
+        'callback'  => '\block_snapfeeds\event_handlers::review_course',
     ],
 ];

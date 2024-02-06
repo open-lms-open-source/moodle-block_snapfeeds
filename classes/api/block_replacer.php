@@ -103,7 +103,7 @@ SQL;
      */
     public function replace_upcoming_events_with_snap_feeds_deadlines($parentcontextid = null) {
         $config = (object) [
-            'feedtype' => 'deadlines'
+            'feedtype' => 'deadlines',
         ];
         $this->replace_block('snapfeeds', 'calendar_upcoming', $config, null, $parentcontextid);
     }
@@ -114,7 +114,7 @@ SQL;
      */
     public function replace_snap_feeds_deadlines_with_upcoming_events($parentcontextid = null) {
         $config = (object) [
-            'feedtype' => 'deadlines'
+            'feedtype' => 'deadlines',
         ];
         $this->replace_block('calendar_upcoming', 'snapfeeds', null, $config, $parentcontextid);
     }
