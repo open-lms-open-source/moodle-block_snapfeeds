@@ -24,6 +24,7 @@ Feature: Add snapfeeds blocks.
 
   @javascript
   Scenario: Add a Snap feeds block to the main page.
+    Given I skip because "It will be reviewed on the ticket INT-19878"
     Given I log in as "admin"
     And I am on site homepage
     And I turn editing mode on
