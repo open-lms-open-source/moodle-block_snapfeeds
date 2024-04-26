@@ -24,7 +24,6 @@ Feature: Add snapfeeds blocks.
 
   @javascript
   Scenario: Add a Snap feeds block to the main page.
-    Given I skip because "It will be reviewed on the ticket INT-19878"
     Given I log in as "admin"
     And I am on site homepage
     And I turn editing mode on
@@ -32,7 +31,7 @@ Feature: Add snapfeeds blocks.
     Then I should see "This Snap feed has not been configured"
     And I configure the "Snap feeds" block
     When I set the following fields to these values:
-      | id_config_feedtype | deadlines |
+      | Snap feed type | deadlines |
     And I press "Save changes"
     And I turn editing mode off
     Then I should see "Deadlines" in the "Snap feeds" "block"
