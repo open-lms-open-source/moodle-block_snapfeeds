@@ -77,7 +77,7 @@ SQL;
 $params = ['blockname' => $blocknames->source];
 if ($blocknames->source == 'snapfeeds') {
     $config = (object) [
-        'feedtype' => 'deadlines'
+        'feedtype' => 'deadlines',
     ];
     $params['configdata'] = base64_encode(serialize($config));
     $query .= '  AND configdata = :configdata';
