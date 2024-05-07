@@ -49,7 +49,7 @@ class block_replacer {
      * Singleton instance getter.
      * @return block_replacer
      */
-    public static function get_instance() : block_replacer {
+    public static function get_instance(): block_replacer {
         if (self::$instance == null) {
             self::$instance = new block_replacer();
         }
