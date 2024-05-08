@@ -25,8 +25,6 @@ namespace block_snapfeeds;
 use block_snapfeeds\api\block_replacer;
 use core\event\base;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Event handlers class.
  *

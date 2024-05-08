@@ -24,8 +24,6 @@
 
 use theme_snap\output\ce_render_helper;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Snap feeds block class.
  *
