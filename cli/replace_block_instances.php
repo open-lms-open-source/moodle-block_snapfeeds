@@ -88,7 +88,8 @@ $toreplacecount = $DB->count_records_sql($query, $params);
 if (empty($toreplacecount)) {
     cli_writeln("[WARN] No instances found for 'block_{$blocknames->source}'.");
 } else {
-    cli_writeln("[INFO] Will replace $toreplacecount instances of 'block_{$blocknames->source}' with 'block_{$blocknames->target}'");
+    cli_writeln("[INFO] Will replace $toreplacecount instances of 'block_{$blocknames->source}'
+    with 'block_{$blocknames->target}'");
 }
 
 $murl = (new moodle_url('admin/blocks.php'))->out();
