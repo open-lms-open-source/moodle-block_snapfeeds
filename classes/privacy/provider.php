@@ -24,8 +24,6 @@
 
 namespace block_snapfeeds\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Privacy Subsystem for block_snapfeeds implementing null_provider.
  *

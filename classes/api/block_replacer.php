@@ -24,8 +24,6 @@
 
 namespace block_snapfeeds\api;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Block replacer.
  *
