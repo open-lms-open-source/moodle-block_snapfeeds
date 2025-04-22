@@ -100,10 +100,9 @@ class block_snapfeeds extends block_base {
                 $virtualpaging = true; // Web service retrieves all elements, need to do virtual paging.
                 $nocontentstr = get_string('no' . $feedtype, 'theme_snap');
                 $showreload = true;
-                $waitforpm = false; // We are out of Snap, we don't need to wait for the PM to open.
                 $this->content->text = ce_render_helper::get_instance()
                     ->render_feed_web_component($feedtype, $heading,
-                        $nocontentstr, $virtualpaging, $showreload, $waitforpm, $courseid);
+                        $nocontentstr, $virtualpaging, $showreload, $courseid);
                 break;
             default:
                 $this->content->text = get_string('nofeedconfigured', 'block_snapfeeds');

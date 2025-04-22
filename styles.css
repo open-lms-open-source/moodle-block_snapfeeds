@@ -71,11 +71,11 @@
   .block_snapfeeds .snap-media-object .snap-unread-marker {
     color: #b55600; }
 
-.block_snapfeeds .snap-personal-menu-more {
+.block_snapfeeds .snap-sidebar-menu-more {
   display: block;
   text-align: right; }
 
-.block_snapfeeds .snap-personal-menu-feed-loading:after {
+.block_snapfeeds .snap-sidebar-menu-feed-loading:after {
   content: '';
   display: inline-block;
   position: relative;

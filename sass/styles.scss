@@ -158,12 +158,12 @@ $brand-warning: #b55600;
 
 }
 
-.block_snapfeeds .snap-personal-menu-more {
+.block_snapfeeds .snap-sidebar-menu-more {
   display: block;
   text-align: right;
 }
 
-.block_snapfeeds .snap-personal-menu-feed-loading {
+.block_snapfeeds .snap-sidebar-menu-feed-loading {
   &:after {
     @include ajaxing(inline-block, relative, 20px, 6px);
   }
